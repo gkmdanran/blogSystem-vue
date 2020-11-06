@@ -27,15 +27,23 @@
                         <i class="el-icon-goods"></i>
                         <span slot="title">皮肤管理</span>
                     </el-menu-item>
+                    <el-menu-item index="/filelists">
+                        <i class="el-icon-folder-opened"></i>
+                        <span slot="title">文件清理</span>
+                    </el-menu-item>
                 </el-menu>
             </el-aside>
             <el-container>
                 <el-header>
                     <div class="titlename">
-                        <img src="../assets/img/bgc.jpg" alt="">
+                        <img src="../assets/img/headpic.jpg" alt="">
                         <div class="title" @click="$router.push('/home')">顾凯铭de博客</div>
-                        
-                        </div>
+                       <a target="_blank" href="http://www.baidu.com">
+                            <el-button size="mini" type="info" >
+                                我的博客<i class="el-icon-s-promotion"></i>
+                            </el-button>
+                        </a>
+                    </div>
                     <div class="userinfos">
                         <div class="times">{{currentTime}}</div>
                         <el-dropdown trigger="click" @command="handleCommand">
@@ -89,7 +97,7 @@ export default {
             }
         },
         LoginOut(){
-            console.log(1)
+            
             sessionStorage.clear()
             this.$router.push('/')
         },
@@ -187,6 +195,10 @@ export default {
         border-radius: 50%;
         background-color: palegoldenrod;
         margin-right: 15px;
+    }
+    .titlename .el-button{
+        margin-left: 20px;
+        margin-top: 5px;
     }
     .userinfos .el-dropdown{
         cursor: pointer;

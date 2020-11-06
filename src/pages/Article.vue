@@ -87,7 +87,7 @@
                     </template>
                 </el-table-column>
                 
-                <el-table-column label="操作" width="350px">
+                <el-table-column label="操作" width="360px">
                      <template slot-scope="scope">
                         <el-button  type="primary" icon="el-icon-edit" size="small" @click="editArticle(scope.row._id)">编辑文章</el-button>
                         <el-button  type="danger" icon="el-icon-delete" size="small" @click="deleteArticle(scope.row._id)">删除文章</el-button>
@@ -131,7 +131,7 @@ export default {
     methods:{
         handleSelectionChange(val) {
             this.multipleSelection = val;
-            console.log(this.multipleSelection)
+            
         },
         handleSizeChange(val) {
             this.pageSzie=val
@@ -143,7 +143,7 @@ export default {
         },
         async getArticle(){
             const res=await getArticles(this.query,this.tagquery,this.pageNum,this.pageSzie)
-            console.log(res)
+            
             this.articleData=res.data.list
             this.total=res.data.total
         },
@@ -171,7 +171,7 @@ export default {
         },
         async getTag(){
             const res=await getTags()
-            console.log(res)
+            
             this.tagSelectList=res.data.list          
         },
         search(){

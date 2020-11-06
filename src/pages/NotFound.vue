@@ -43,13 +43,13 @@ export default {
         width:580px; 
         height:234px; 
         margin:50px auto 0 auto; 
-        background:url('http://zq027.com/Public/images/head404.png') no-repeat; 
+        background:url('../assets/img/head404.png') no-repeat; 
     }
     .txtbg404{ 
         width:499px; 
         height:169px; 
         margin:10px auto 0 auto; 
-        background:url('http://zq027.com/Public/images/txtbg404.png') 
+        background:url('../assets/img/txtbg404.png') 
         no-repeat;
     } 
     .txtbg404 .txtbox{ 

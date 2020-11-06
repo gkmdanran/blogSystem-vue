@@ -118,14 +118,14 @@ export default {
         this.$refs['addForm'].validate(async (valid) => {
             if (valid) {
                 const res=await addPictures(this.pictureInfo)
-                console.log(res)
+                
                 if(res.code==200){
                     this.dialogVisible=false
                     this.getPictureList()
                 }
                     
             } else {
-                console.log('error submit!!');
+                
                 return false;
             }
         });
@@ -133,7 +133,7 @@ export default {
     },
     async getPictureList(){
         const res=await getPictures()
-        console.log(res)
+        
         if(res.code==200){
             this.pictureList=res.data
         }
@@ -141,7 +141,7 @@ export default {
     }
   },
   created(){
-      console.log(1)
+      
       this.getPictureList()
   }
 }

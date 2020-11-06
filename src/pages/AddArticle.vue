@@ -17,6 +17,7 @@
                 <el-input v-model="article.otherhref" class="title"></el-input>
      
             </div>
+            
             <div class="column">
                 <span class="lab">博客标签</span>
                 <el-tag
@@ -52,6 +53,9 @@
                 </div>
             </div>
              <mavon-editor
+                ref="md"
+                @imgAdd="handleEditorImgAdd"
+                @imgDel="handleEditorImgDel"
                 v-model="article.mdValue"
                 navigation 
                 @change="markChange" 
@@ -66,7 +70,7 @@
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import {getTags,addTags} from "../network/tags"
-import {addArticle,getById,editArticle} from "../network/article"
+import {addArticle,getById,editArticle,addArticlePic,addFile} from "../network/article"
 export default {
     name: 'AddArticle',
     data () {
@@ -90,7 +94,8 @@ export default {
                 mdValue:''
             },
             timer:'',
-            updateId:''
+            updateId:'',
+            imgFile:{}
         }
     },
     components:{// 在页面中注册组件
@@ -125,7 +130,6 @@ export default {
                     })
                 }    
                 const res=await addTags(this.inputValue,type)
-                console.log(res)
                 if(res.code==200){        
                     this.dynamicTags.push(res.data);
                     this.getTag()
@@ -137,13 +141,12 @@ export default {
         },
         async getTag(){
             const res=await getTags()
-            // console.log(res)
             this.tagData=res.data.list          
         },
         chooseTag(id){
             var tag=this.tagData.find(item=>item._id==id)
             var index=this.dynamicTags.findIndex(item=>item._id==tag._id)
-            console.log(index)
+            
             if(index==-1){
                 if(this.dynamicTags.length>2)
                     return this.$message({
@@ -183,6 +186,7 @@ export default {
                     type:'warning',
                     duration:800
                 })
+            
             if(this.article.tags=='')
                 return this.$message({
                     message:'请至少选择一个标签~',
@@ -195,15 +199,21 @@ export default {
                     type:'warning',
                     duration:800
                 })
-            // console.log(this.article)
+            
             localStorage.removeItem('article_session')
+            var imglist=[]
+            this.article.context.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
+                if(imglist.indexOf(capture)==-1)
+                imglist.push(capture)
+            });
+            
             if(this.isUpdate==false){
-                const res=await addArticle(this.article)
+                const res=await addArticle(this.article,imglist.join(','))
                 if(res.code==200)
                     this.$router.push('/article')
             }else{
-                console.log(this.article)
-                const res=await editArticle(this.article,this.updateId)
+                
+                const res=await editArticle(this.article,this.updateId,imglist.join(','))
                 if(res.code==200)
                     this.$router.push('/article')
             }
@@ -231,6 +241,7 @@ export default {
             if(this.$route.query.article_id){
                 this.isUpdate=true
                 const {data}=await getById(this.$route.query.article_id)
+                
                 var {_id,title,context,contextText,tags,otherhref,mdValue}=data
                 if(!data._id)
                     return this.$router.push('/notarticle')
@@ -282,10 +293,37 @@ export default {
                         this.dynamicTags.push(tag)
                     }
             }
+        },
+        async handleEditorImgAdd (pos, $file) {
+            var formdata = new FormData()
+            formdata.append('file', $file)
+            this.imgFile[pos] = $file
+            const res=await addArticlePic(formdata)
+            await addFile(res.filename)
             
-                
-            
-        }
+            if (res.url) {
+                    let url = res.url
+                    let name = $file.name
+                    if (name.includes('-')) {
+                        name = name.replace(/-/g, '')
+                    }
+                    let content = this.article.mdValue
+                    // 第二步.将返回的url替换到文本原位置![...](0) -> ![...](url)  这里是必须要有的
+                    if (content.includes(name)) {
+                        let oStr = `(${pos})`
+                        let nStr = `(${url})`
+                        let index = content.indexOf(oStr)
+                        let str = content.replace(oStr, '')
+                        let insertStr = (soure, start, newStr) => {
+                            return soure.slice(0, start) + newStr + soure.slice(start)
+                        }
+                        this.article.mdValue = insertStr(str, index, nStr)
+                    }
+            }
+        },
+        handleEditorImgDel (pos) {
+            delete this.imgFile[pos[0]]
+        },
     },
     async created(){
         await this.getTag()
@@ -359,5 +397,10 @@ export default {
         font-size: 14px;
         margin-left: 110px;
         margin-top: 10px;
+    }
+    .nofile{
+        font-size: 14px;
+        color: #cccccc;
+        font-style: italic;
     }
 </style>

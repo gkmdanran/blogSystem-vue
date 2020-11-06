@@ -75,7 +75,7 @@ export default {
         },
         async getTag(){
             const res=await getTags(this.query,this.pageNum,this.pageSzie)
-            console.log(res)
+            
             this.tagData=res.data.list
             this.total=res.data.total
         },
@@ -85,7 +85,7 @@ export default {
             this.getTag()
         },
         async deleteTag(id){
-            console.log(id)
+            
             await delTag(id)
             this.getTag()
         },

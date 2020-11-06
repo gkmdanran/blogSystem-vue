@@ -1,5 +1,5 @@
 <template>
-  <div class="pclogin">
+  <div class="pclogin" v-loading="loading">
       
       <div class="contents">
         <div class="left">
@@ -16,22 +16,24 @@
             <div class="names">
               个人博客后台管理系统
             </div>
-                   
-            <div class="us" >
+            <form action="" class="fom">
+              <div class="us" >
                 <i class="el-icon-s-custom"></i>
                 <input type="text" v-model.trim="userInfo.userName" placeholder="请输入用户名">   
-            </div>
-            <div class="us" >
-                <i class="el-icon-lock"></i>
-                <input type="password" v-model="userInfo.password" placeholder="请输入密码"> 
-            </div>
+              </div>
+              <div class="us" >
+                  <i class="el-icon-lock"></i>
+                  <input type="password" autocomplete v-model="userInfo.password" placeholder="请输入密码" @keyup.enter="login"> 
+              </div>
+            </form>     
+            
             <div class="foots">
-              <input type="checkbox" class="checks">
-              记住账号
+              <!-- <input type="checkbox" class="checks">
+              记住账号 -->
                <button @click="login">登录</button>
             </div>
           </div>
-          <div class="forget">忘记密码?寻求帮助</div>
+          <div class="forget" @click="forgetPassword">忘记密码?寻求帮助</div>
         </div>
       </div>
   </div>
@@ -47,15 +49,18 @@ export default {
         userInfo:{
           userName:'',
           password:''
-        }
+        },
+        loading:false
     }
   },
   methods:{
     async login(){
       if(this.userInfo.userName!==''&&this.userInfo.password!==''){
         sessionStorage.clear()
+        this.loading=true
         const res=await loginSystem(this.userInfo)
-        console.log(res)
+        this.loading=false
+        
         if(res.code==200){
           sessionStorage.setItem('blog_token',res.data.token)
           this.$cookies.set("userName",res.data.userName,"7d");
@@ -64,10 +69,18 @@ export default {
           
       }
         
+    },
+    forgetPassword(){
+      this.$message({
+            message:'请联系管理员,管理员邮箱:1755989501@qq.com',
+            type:'warning',
+            showClose:true
+        })
     }
   },
-  mounted:function(){
-    
+  created(){
+    if(this.$cookies.get('userName'))
+      this.userInfo.userName=this.$cookies.get('userName')
   }
 }
 </script>
@@ -99,7 +112,7 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
-  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.3) ;
+  box-shadow: 1px 1px 12px 6px rgba(0,0,0,0.5) ;
   border-radius: 10px;
 }
 .contents .left{
@@ -155,15 +168,17 @@ export default {
   color: #696969;
   height: 20px;
 }
-
+.right .fom {
+  height: 38%;
+}
 .right .us{
   width: 100%;
-  height: 15%;
+  height: 40%;
   border-radius: 3px;
   background-color: #f4f4f4;
   display: flex;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 6%;
   padding-left: 15px;
 }
 .us input {
@@ -196,7 +211,7 @@ export default {
   float: right;
   vertical-align: middle;
   height: 35px;
-  width:40%;
+  width:100%;
   border-radius: 3px;
   border: 0;
   outline: 0;

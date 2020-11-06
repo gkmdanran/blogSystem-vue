@@ -1,7 +1,7 @@
 import {request} from "./request"
-export const addArticle=(article)=>request({
+export const addArticle=(article,imgs)=>request({
     url:'/addarticle',
-    data:article,
+    data:{article,imgs},
     method:'POST'
 })
 export const getArticles=(query,tagquery,pageNum,pageSize)=>request({
@@ -18,16 +18,26 @@ export const getById=(id)=>request({
     url:`/detailarticle?id=${id}`,
 })
 
-export const editArticle=(article,id)=>request({
+export const editArticle=(article,id,imgs)=>request({
     url:'/editarticle',
     data:{
         ...article,
-        id,id},
+        id,imgs},
     method:'POST'
 })
 
 export const TopArticle=(id,type)=>request({
     url:'/totop',
     data:{id,type},
+    method:'POST'
+})
+export const addArticlePic=(formdata)=>request({
+    url:'/upload',
+    data:formdata,
+    method:'POST'
+})
+export const addFile=(filename)=>request({
+    url:'/addfile',
+    data:{filename},
     method:'POST'
 })

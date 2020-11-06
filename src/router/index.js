@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import {checkLogin} from "../network/login"
 const Login=()=> import('@/pages/Login')
 const Home=()=> import('@/pages/Home')
 const Welcome=()=> import('@/pages/Welcome')
@@ -11,9 +12,13 @@ const NotFound=()=> import('@/pages/NotFound')
 const PictureList=()=> import('@/pages/PictureList')
 const Chat=()=> import('@/pages/Chat')
 const Skin=()=>import('@/pages/Skin')
+const FileLists=()=>import('@/pages/FileLists')
+
 Vue.use(Router)
 
-export default new Router({
+
+
+var router=new Router({
   routes: [
     {
       path: '/',
@@ -66,6 +71,11 @@ export default new Router({
           name: 'Skin',
           component: Skin
         },
+        {
+          path: '/filelists',
+          name: 'FileLists',
+          component: FileLists
+        },
       ]
     },
     {
@@ -75,3 +85,13 @@ export default new Router({
     },
   ]
 })
+router.beforeEach(async (to,from,next)=>{
+  //to 将要访问的路径
+  //from 代表从哪个路径跳转而来
+  //next()直接放行 next('/login)强制跳转到login
+  if(to.path=="/")return next();
+  const {code}=await checkLogin()
+  if(code!=200) return next("/")
+  next()
+})
+export default router

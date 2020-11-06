@@ -13,3 +13,7 @@ export const changePassword=(userName,oldPassword,newPassword)=>request({
     },
     method:'POST'
 })
+export const checkLogin=()=>request({
+    url:'/checklogin',
+    method:'POST'
+})

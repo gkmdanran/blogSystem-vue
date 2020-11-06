@@ -76,14 +76,14 @@ export default {
             this.$refs['changeForm'].validate(async (valid) => {
                 if (valid) {
                     const res=await changePassword(userName,this.passwords.oldPassword,this.passwords.newPassword)
-                    console.log(res)
+                    
                     if(res.code==200){
                         sessionStorage.clear()
                         this.$router.push('/')
                         this.$emit('update:changeVisible', false)
                     }
                 } else {
-                    console.log('error submit!!');
+                    
                     return false;
                 }
             });

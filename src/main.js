@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import VueCookies from 'vue-cookies'
-
+import 'default-passive-events'
 
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/global.css'

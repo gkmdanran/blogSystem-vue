@@ -28,6 +28,7 @@
                         :src="pic"
                         :preview-src-list="previewList"
                         fit="cover"
+                        lazy
                         >
                         </el-image>
                     </div>
@@ -157,7 +158,7 @@ export default {
             if(code==200){
                  this.PictureInfo=data
                  this.previewList=this.PictureInfo.picDetailList==''?[]:this.PictureInfo.picDetailList.split(',').map(item=>'http://localhost:3000/uploads/'+item)
-                 console.log(data)
+                 
             }
                
         },
@@ -170,9 +171,9 @@ export default {
                 diff=diff.join('')
                 var str='http://localhost:3000/uploads/'
                 let filename=diff.split(str).join(',').substr(1)
-                console.log(arr1)
-                console.log(arr2)
-                console.log(filename,count)
+                // console.log(arr1)
+                // console.log(arr2)
+                // console.log(filename,count)
                 
                 const res=await delPicList(this.PictureInfo._id,filename,arr2.join(','),count)
                 if(res.code==200)
@@ -203,14 +204,14 @@ export default {
             this.$refs['editForm'].validate(async (valid) => {
                 if (valid) {
                     const res=await editPictures(this.PictureInfo._id,this.PictureInfo.title,this.PictureInfo.tag,this.password)
-                    console.log(res)
+                    
                     if(res.code==200){
                         this.dialogVisible=false
                         this.getDeailInfo()
                     }
                         
                 } else {
-                    console.log('error submit!!');
+                    
                     return false;
                 }
             });
