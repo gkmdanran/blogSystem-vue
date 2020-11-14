@@ -28,7 +28,7 @@
                         :src="pic"
                         :preview-src-list="previewList"
                         fit="cover"
-                        lazy
+                        
                         >
                         </el-image>
                     </div>

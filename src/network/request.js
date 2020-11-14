@@ -31,3 +31,11 @@ import Vue from 'vue'
     })
     return instance(config)
  }
+ export  function requestBgc(config){
+    const instance=axios.create({
+        baseURL:'http://localhost:3000/blog/api',
+        
+    })
+
+    return instance(config)
+ }

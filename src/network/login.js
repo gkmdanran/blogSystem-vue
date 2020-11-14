@@ -1,4 +1,4 @@
-import {request} from "./request"
+import {request,requestBgc} from "./request"
 export const loginSystem=(userInfo)=>request({
     url:'/login',
     data:userInfo,
@@ -16,4 +16,7 @@ export const changePassword=(userName,oldPassword,newPassword)=>request({
 export const checkLogin=()=>request({
     url:'/checklogin',
     method:'POST'
+})
+export const getImg=()=>requestBgc({
+    url:`/getskin`,
 })

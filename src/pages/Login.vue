@@ -1,5 +1,5 @@
 <template>
-  <div class="pclogin" v-loading="loading">
+  <div class="pclogin" v-loading="loading" :style="{backgroundImage: 'url(' + skinUrl + ')'}">
       
       <div class="contents">
         <div class="left">
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import {loginSystem} from "../network/login"
+import {loginSystem,getImg} from "../network/login"
 export default {
   
   name: 'pclogin',
@@ -50,7 +50,8 @@ export default {
           userName:'',
           password:''
         },
-        loading:false
+        loading:false,
+        skinUrl:''
     }
   },
   methods:{
@@ -78,9 +79,15 @@ export default {
         })
     }
   },
-  created(){
+  async created(){
     if(this.$cookies.get('userName'))
       this.userInfo.userName=this.$cookies.get('userName')
+    let res=await getImg()
+    
+    if(res.data.code==200)
+      this.skinUrl=res.data.data
+    else
+      this.skinUrl=require("../assets/img/bgc.jpg")
   }
 }
 </script>
@@ -90,8 +97,8 @@ export default {
 .pclogin {
   width: 100%;
   height: 100%;
-  background: url("../assets/img/bgc.jpg") no-repeat;
   
+  background-repeat: no-repeat;
   background-size:100% 100%;
   position: relative;
   min-height: 700px;
@@ -128,6 +135,7 @@ export default {
   height: 100%;
   width: 36.3%;
   background: #ffffff;
+  opacity: 0.9;
 }
 .left .title {
   height: 50px;

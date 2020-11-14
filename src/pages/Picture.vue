@@ -21,6 +21,7 @@
                         <i class="el-icon-delete" @click.stop="delPictures(pic)"></i>
                     </div>
                 </transition>
+                <i class="el-icon-lock" v-show="pic.password!=''"></i>
                 <img class="picture" :src="pic.cover==''?require('../assets/img/timg.jpg'):pic.cover" :title="pic.createTime|dateFormat"/>
                 <div class="title">{{pic.title}}</div>
                 <div class="count">{{pic.count}}</div>
@@ -150,7 +151,7 @@ export default {
 
 <style scoped>
     .fade-enter-active, .fade-leave-active {
-        transition: opacity .8s ease;
+        transition: opacity .3s ease;
     }
     .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
         opacity: 0;
@@ -181,6 +182,13 @@ export default {
         background-color: #fefff7;
         box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.2);
     }
+    .el-icon-lock{
+        position: absolute;
+        right: 10px;
+        bottom: 13px;
+        font-weight: 700;
+        color: red;
+    }
     .photo_cmp .picture{
         width: 168px;
         height: 168px;
@@ -193,7 +201,7 @@ export default {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        font-size: #333;
+        color: #333;
         font-size: 14px;
         text-align: center;
     }

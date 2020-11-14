@@ -61,6 +61,7 @@
                 @change="markChange" 
                 @save="saveToSession"
                 style="min-height: 500px"
+                fontSize="20px"
             />
         </div>
     </div>
@@ -203,10 +204,10 @@ export default {
             localStorage.removeItem('article_session')
             var imglist=[]
             this.article.context.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
-                if(imglist.indexOf(capture)==-1)
+                if(imglist.indexOf(capture)==-1&&capture.indexOf("localhost:3000/uploads")!=-1)
                 imglist.push(capture)
             });
-            
+            // console.log(imglist)
             if(this.isUpdate==false){
                 const res=await addArticle(this.article,imglist.join(','))
                 if(res.code==200)
