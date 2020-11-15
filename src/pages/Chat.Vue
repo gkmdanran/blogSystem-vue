@@ -25,6 +25,11 @@
                 <el-table-column prop="chatContent" label="内容">
                 </el-table-column>
                 <el-table-column prop="chatWay" label="联系方式">
+                     <template slot-scope="scope">
+                        <span>
+                            {{scope.row.chatWay=='：'?'暂无':scope.row.chatWay}}
+                        </span>
+                    </template>
                 </el-table-column>
                 <el-table-column prop="createTime" label="发言时间">
                     <template slot-scope="scope">
