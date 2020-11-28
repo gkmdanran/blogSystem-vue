@@ -31,6 +31,10 @@
                         <i class="el-icon-folder-opened"></i>
                         <span slot="title">文件清理</span>
                     </el-menu-item>
+                    <el-menu-item index="/music">
+                        <i class="el-icon-headset"></i>
+                        <span slot="title">音乐管理</span>
+                    </el-menu-item>
                 </el-menu>
             </el-aside>
             <el-container>

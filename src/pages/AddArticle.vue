@@ -57,7 +57,7 @@
                 @imgAdd="handleEditorImgAdd"
                 @imgDel="handleEditorImgDel"
                 v-model="article.mdValue"
-                navigation 
+                codeStyle="dark"
                 @change="markChange" 
                 @save="saveToSession"
                 style="min-height: 500px"

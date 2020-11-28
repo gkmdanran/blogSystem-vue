@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Vue from 'vue'
- export  function request(config){
+export  function request(config){
     const instance=axios.create({
         baseURL:'http://localhost:3000/admin/api',
         
@@ -39,3 +39,13 @@ import Vue from 'vue'
 
     return instance(config)
  }
+ export  function requestMusic(config){
+    const instance=axios.create({
+        baseURL:'https://api.imjad.cn/cloudmusic/',
+       
+    })
+    instance.interceptors.response.use(res => {
+            return res.data
+    }, err => {})
+    return instance(config)
+}

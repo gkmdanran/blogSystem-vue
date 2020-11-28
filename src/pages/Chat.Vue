@@ -20,18 +20,18 @@
              <el-table :data="chatData" style="width: 100%" stripe  border @selection-change="handleSelectionChange">
                 <el-table-column type="selection" >
                 </el-table-column>
-                <el-table-column prop="chatName" label="留言人">
+                <el-table-column prop="chatName" label="留言人" width="180px">
                 </el-table-column>
-                <el-table-column prop="chatContent" label="内容">
+                <el-table-column prop="chatContent" label="内容" >
                 </el-table-column>
-                <el-table-column prop="chatWay" label="联系方式">
+                <el-table-column prop="chatWay" label="联系方式" show-overflow-tooltip>
                      <template slot-scope="scope">
                         <span>
                             {{scope.row.chatWay=='：'?'暂无':scope.row.chatWay}}
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="createTime" label="发言时间">
+                <el-table-column prop="createTime" label="发言时间"  width="180px">
                     <template slot-scope="scope">
                         <span>{{scope.row.createTime|dateFormat}}</span>
                     </template>

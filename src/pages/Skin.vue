@@ -19,7 +19,7 @@
                                 :src="scope.row.skinUrl"
                                 fit="cover"
                                 :preview-src-list="[scope.row.skinUrl]"
-                                lazy></el-image>
+                               ></el-image>
                         </template>
                     </el-table-column>
                     <el-table-column prop="showTime" label="触发日期">
@@ -121,6 +121,7 @@ export default {
         handleClose(){
             if(this.skinForm.skinUrl!=''){
                 var filename=this.skinForm.skinUrl.split('/uploads/')[1]
+                console.log(this.skinForm.skinUrl)
                 deluUploads(filename)
                 this.$refs.upload.clearFiles()
                 this.hideUpload = this.fileList.length == 1;
@@ -137,6 +138,7 @@ export default {
             this.hideUpload = fileList.length == 1;
         },
         uploadSuccess(file){
+            // console.log(file)
             this.skinForm.skinUrl=file.url
         },
         saveSkin(){

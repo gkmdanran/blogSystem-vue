@@ -8,7 +8,7 @@ export const getArticles=(query,tagquery,pageNum,pageSize)=>request({
     url:`/articles?query=${query}&tagquery=${tagquery}&pageNum=${pageNum}&pageSize=${pageSize}`,
 })
 export const delArticle=(ids)=>request({
-    url:`/delarticle?`,
+    url:`/delarticle`,
     method:'POST',
     data:{
         ids

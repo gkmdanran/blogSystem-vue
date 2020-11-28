@@ -80,14 +80,19 @@ export default {
     }
   },
   async created(){
+    this.skinUrl=require("../assets/img/bgc.jpg")
     if(this.$cookies.get('userName'))
       this.userInfo.userName=this.$cookies.get('userName')
-    let res=await getImg()
+      try {
+        let res=await getImg()
+        if(res&&res.data.code==200)
+          this.skinUrl=res.data.data
+        else
+          this.skinUrl=require("../assets/img/bgc.jpg")
+      } catch (error) {
+           this.skinUrl=require("../assets/img/bgc.jpg")
+      }
     
-    if(res.data.code==200)
-      this.skinUrl=res.data.data
-    else
-      this.skinUrl=require("../assets/img/bgc.jpg")
   }
 }
 </script>

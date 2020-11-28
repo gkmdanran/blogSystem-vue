@@ -3,14 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import ElementUI from 'element-ui';
+
 import VueCookies from 'vue-cookies'
 import 'default-passive-events'
 
-import 'element-ui/lib/theme-chalk/index.css';
+import './middle/elementmiddle'
 import './assets/css/global.css'
 
-Vue.use(ElementUI);
+
 Vue.use(VueCookies)
 Vue.config.productionTip = false
 Vue.filter('dateFormat',function(originVal){

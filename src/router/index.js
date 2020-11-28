@@ -13,7 +13,7 @@ const PictureList=()=> import('@/pages/PictureList')
 const Chat=()=> import('@/pages/Chat')
 const Skin=()=>import('@/pages/Skin')
 const FileLists=()=>import('@/pages/FileLists')
-
+const Music=()=>import('@/pages/Music')
 Vue.use(Router)
 
 
@@ -75,6 +75,11 @@ var router=new Router({
           path: '/filelists',
           name: 'FileLists',
           component: FileLists
+        },
+        {
+          path: '/music',
+          name: 'Music',
+          component: Music
         },
       ]
     },
