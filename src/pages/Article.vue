@@ -87,7 +87,7 @@
                     </template>
                 </el-table-column>
                 
-                <el-table-column label="操作" width="360px">
+                <el-table-column label="操作" width="370px">
                      <template slot-scope="scope">
                         <el-button  type="primary" icon="el-icon-edit" size="small" @click="editArticle(scope.row._id)">编辑文章</el-button>
                         <el-button  type="danger" icon="el-icon-delete" size="small" @click="deleteArticle(scope.row._id)">删除文章</el-button>
