@@ -2,7 +2,7 @@ import axios from 'axios'
 import Vue from 'vue'
 export  function request(config){
     const instance=axios.create({
-        baseURL:'http://localhost:3000/admin/api',
+        baseURL:'http://101.132.68.0:3000/admin/api',
         
     })
     instance.interceptors.request.use(config => {
@@ -33,7 +33,7 @@ export  function request(config){
  }
  export  function requestBgc(config){
     const instance=axios.create({
-        baseURL:'http://localhost:3000/blog/api',
+        baseURL:'http://101.132.68.0:3000/blog/api',
         
     })
 

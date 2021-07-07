@@ -53,7 +53,7 @@
                     <el-form-item label="皮肤" prop="skinUrl">
                         <el-upload
                             ref="upload"
-                            action="http://localhost:3000/admin/api/upload"
+                            action="http://101.132.68.0:3000/admin/api/upload"
                             :headers="header"
                             list-type="picture-card"
                             :on-success="uploadSuccess"

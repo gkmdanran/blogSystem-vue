@@ -204,7 +204,7 @@ export default {
             localStorage.removeItem('article_session')
             var imglist=[]
             this.article.context.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
-                if(imglist.indexOf(capture)==-1&&capture.indexOf("localhost:3000/uploads")!=-1)
+                if(imglist.indexOf(capture)==-1&&capture.indexOf("101.132.68.0:3000/uploads")!=-1)
                 imglist.push(capture)
             });
             // console.log(imglist)

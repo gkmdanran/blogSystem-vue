@@ -34,7 +34,7 @@
                     </div>
                 </el-checkbox-group>
                 <el-upload
-                        action="http://localhost:3000/admin/api/upload"
+                        action="http://101.132.68.0:3000/admin/api/upload"
                         multiple
                         list-type="picture-card"
                         :headers="header"
@@ -157,7 +157,7 @@ export default {
                 return this.$router.push('/notpicture')
             if(code==200){
                  this.PictureInfo=data
-                 this.previewList=this.PictureInfo.picDetailList==''?[]:this.PictureInfo.picDetailList.split(',').map(item=>'http://localhost:3000/uploads/'+item)
+                 this.previewList=this.PictureInfo.picDetailList==''?[]:this.PictureInfo.picDetailList.split(',').map(item=>'http://101.132.68.0:3000/uploads/'+item)
                  
             }
                
@@ -169,7 +169,7 @@ export default {
                 let diff = arr1.filter(function (val) { return arr2.indexOf(val) === -1 })
                 var count=diff.length
                 diff=diff.join('')
-                var str='http://localhost:3000/uploads/'
+                var str='http://101.132.68.0:3000/uploads/'
                 let filename=diff.split(str).join(',').substr(1)
                 // console.log(arr1)
                 // console.log(arr2)

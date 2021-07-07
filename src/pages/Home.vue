@@ -42,7 +42,7 @@
                     <div class="titlename">
                         <img src="../assets/img/headpic.jpg" alt="">
                         <div class="title" @click="$router.push('/home')">顾凯铭de博客</div>
-                       <a target="_blank" href="http://www.baidu.com">
+                       <a target="_blank" href="http://101.132.68.0:3333">
                             <el-button size="mini" type="info" >
                                 我的博客<i class="el-icon-s-promotion"></i>
                             </el-button>
