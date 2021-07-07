@@ -96,6 +96,7 @@ export default {
                 for(let x of this.multipleSelection){
                     list.push(x._id)
                 }
+                
                  this.$confirm(`确认删除${list.length}条评论吗？`)
                 .then(async _ => {
                     await delChats(list.join(','))
